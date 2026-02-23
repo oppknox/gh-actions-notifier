@@ -8,6 +8,7 @@ import pystray
 
 from . import icons
 from .config import config_path
+from .startup import is_startup_enabled, enable_startup, disable_startup
 
 log = logging.getLogger(__name__)
 
@@ -28,6 +29,11 @@ class TrayIcon:
             pystray.MenuItem("Reload Config", self._on_reload_config),
             pystray.MenuItem("Open Log", self._on_open_log),
             pystray.Menu.SEPARATOR,
+            pystray.MenuItem(
+                "Start with Windows",
+                self._on_toggle_startup,
+                checked=lambda _: is_startup_enabled(),
+            ),
             pystray.MenuItem("Quit", self._on_quit),
         )
 
@@ -81,6 +87,12 @@ class TrayIcon:
         log_path = self._app.log_path
         if log_path and log_path.exists():
             os.startfile(str(log_path))
+
+    def _on_toggle_startup(self, icon, item) -> None:
+        if is_startup_enabled():
+            disable_startup()
+        else:
+            enable_startup()
 
     def _on_quit(self, icon, item) -> None:
         self._app.shutdown()
