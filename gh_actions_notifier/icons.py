@@ -1,4 +1,8 @@
-"""Pillow-generated tray status icons."""
+"""Pillow-generated tray status icons.
+
+Each icon is a 64x64 RGBA circle with a small highlight, generated at
+runtime so no image files need to be shipped with the package.
+"""
 
 from PIL import Image, ImageDraw
 

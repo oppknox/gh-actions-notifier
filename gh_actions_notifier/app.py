@@ -1,4 +1,10 @@
-"""Application orchestrator - lifecycle and threading."""
+"""Application orchestrator — wires together auth, polling, and the tray icon.
+
+The main thread runs the pystray event loop. A background daemon thread
+handles authentication and periodic polling with interruptible sleep.
+"""
+
+from __future__ import annotations
 
 import logging
 import os
@@ -21,6 +27,8 @@ def _log_dir() -> Path:
 
 
 class Application:
+    """Top-level application coordinating all components."""
+
     def __init__(self) -> None:
         self.log_path = self._setup_logging()
         self.config = load_config()

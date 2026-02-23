@@ -1,4 +1,10 @@
-"""JSON config at %APPDATA%\\gh-actions-notifier\\config.json."""
+"""JSON config at %APPDATA%\\gh-actions-notifier\\config.json.
+
+Manages a simple JSON configuration file with poll interval and
+repo allowlist/blocklist settings. Missing keys are filled from defaults.
+"""
+
+from __future__ import annotations
 
 import json
 import logging

@@ -1,8 +1,9 @@
 """System tray icon with right-click menu."""
 
+from __future__ import annotations
+
 import logging
 import os
-import subprocess
 
 import pystray
 
@@ -14,6 +15,8 @@ log = logging.getLogger(__name__)
 
 
 class TrayIcon:
+    """Manages the Windows system tray icon and its right-click context menu."""
+
     def __init__(self, app) -> None:
         self._app = app
         self._icon: pystray.Icon | None = None
